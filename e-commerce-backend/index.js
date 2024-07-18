@@ -35,6 +35,9 @@ app.listen(port,()=>{
 app.get('/',(req,res)=>{
      res.send("<h1>Hello you are on Home Page</h1>");
 })
+app.get('/favicon.ico',(req,res)=>{
+  res.end();
+})
 
 app.post('/upload',upload.single('product'),(req,res)=>{
 res.json({
