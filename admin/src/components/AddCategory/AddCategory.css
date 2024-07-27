@@ -1,0 +1,76 @@
+.form{
+    display:flex;
+    flex-direction: column;
+    margin-top: 30px;
+    gap:20px;
+    width:100%;
+    font-family: "Raleway";
+}
+.form div{
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+    position: relative;
+    height:100px;
+}
+.form .image{
+    height:300px;
+}
+.form .image label{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+}
+.form div label{
+    font-weight: 600;
+    font-size: 20px;
+    color:rgb(88, 88, 88);
+     background-color: white;
+     padding-right: 5px;
+     padding-left: 2px;
+     border-radius: 10px;
+    
+}
+.form .image label{
+    height:100%;
+    width:300px;
+} .form .image label img{
+    border-radius: 10px;
+}
+.form div input{
+    outline:none;
+    border:2px solid black;
+    height:40px;
+    width:50%;
+    font-size:18px;
+     padding:0 5px;
+    border-radius: 10px;
+}
+.form .name:hover :is(label){
+    font-size: 15px;
+    position:absolute;
+    margin-left: 10px;
+    top:-10px;
+   transition-duration: 150ms;
+    transition-timing-function:ease-in-out;
+}
+.form .name:hover :is(input){
+    border:2px solid rgb(156, 156, 156);
+    font-family: "Roboto";
+    height:60px;
+    font-size: 15px;
+    padding-left: 15px;
+    transition-duration: 150ms;
+    transition-timing-function:ease-in-out;
+}
+.form button{
+    width:10%;
+    height:40px;
+    background-color: rgb(43, 89, 241);
+    color:white;
+    border:none;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 10px;
+   
+}

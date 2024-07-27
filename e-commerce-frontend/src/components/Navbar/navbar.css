@@ -1,17 +1,20 @@
 .navbar{
     display: flex;
-    justify-content:space-around;
+    justify-content:space-between;
     align-items: center;
-    height: 100px;
+    height: 8%;
+    padding: 0px 50px;
     position:sticky;
-    top:-10px;
+    top:0px;
     z-index: 20;
     background-color: white;
     box-shadow: 0px 1px 3px -2px black;
+
 }
 .navbar .navbar-logo{
      display: flex;
-     margin-left: 100px;
+     
+     align-items: center;
      gap:10px;
 }
 .navbar .navbar-logo img{
@@ -44,24 +47,40 @@
    }
 .login-cart{
     display:flex;
-    gap:45px;
-    align-items:center;
+    column-gap:45px;
+   align-items: center;
+    height:100%;
+}
+.login-cart a{
+    height:70%;
+    text-decoration: none;
+   
 }
 .login-cart button{
+    
+    height:100%;
     width:100%;
-    height:58px;
-    width:157px;
     outline: none;
-    border:1px solid #7a7a7a;
+    border:none;
     border-radius: 75px;
     color:#515151;
     font-size: 20px;
     font-weight: 500;
     background-color: white;
     cursor: pointer;
+    display:flex;
+    align-items: center;
+    padding: 2px 10px;
+    
+    gap:10px
 }
-.login-cart button:active{
- background-color: #f3f3f3;
+.login-cart button:hover{
+ background-color:rgb(243, 184, 176);
+ color:black;
+}
+.cart{
+    display:flex;
+  position:relative;
 }
 .cart-count{
     width:22px;
@@ -69,10 +88,40 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    margin-top: -38px;
-    margin-left: -60px;
+    position:absolute;
+    
+    margin-top: -10px;
+    margin-left: 30px;
     border-radius: 11px;
     font-size:14px;
     background-color: red;
     color:white;
+}
+.searchbar{
+    display:flex;
+    align-items: center;
+    width:40%;
+    height:80%;
+    background-color: #f1f1f1;
+    padding:0px 5px;
+    border-radius: 10px;
+}
+.searchbar .search-icon{
+    margin-top: 5px;
+}
+.searchbar input{
+    outline:none;
+    border:none;
+    height:100%;
+    padding: 0px 2px;
+    font-size: 18px;
+   width:100%;
+   background-color: #f1f1f1;
+   border-top-right-radius: 10px;
+   border-bottom-right-radius: 10px;
+}
+.searchbar .input{
+    width:100%;
+    height:100%;
+    padding:8px 5px;
 }

@@ -15,7 +15,7 @@ import banner_kids from './components/assets/Ecommerce_Assets/Assets/Frontend_As
 
 function App() {
   return (
-    <div>
+    <>
     <BrowserRouter>
     <Navbar/>
     <Routes>
@@ -35,7 +35,7 @@ function App() {
     </BrowserRouter>
 
      
-    </div>
+    </>
   );
 }
 export default App;

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState,useContext} from "react";
 
 
 
@@ -10,7 +10,9 @@ export const shopcontext = createContext();
 const ShopProvider = (props) => {
     const [cartItems, setcartItems] = useState({});
     const [all_product, setall_product] = useState([]);
+    const [all_categories,setall_categories]=useState([{
 
+    }])
     useEffect(() => {
         fetch('http://localhost:4000/allproducts').then((res) => (res.json())).then((data) => (setall_product(data)));
         if (localStorage.getItem('token')) {
@@ -23,9 +25,11 @@ const ShopProvider = (props) => {
                 },
                 body: "",
 
-            }).then((res) => (res.json())).then((data) => setcartItems(data))
+            }).then((res) => (res.json())).then((data) => setall_product(data))
         }
-        else alert("Please Login First");
+
+        fetch('http://localhost:4000/allcategories').then((res)=>res.json()).then((data)=>setall_categories(data));
+        
     }, [])
 
 
@@ -93,7 +97,7 @@ const ShopProvider = (props) => {
         }
         return totalItems;
     }
-    const contextValue = { all_product, cartItems, addToCart, removeFromCart, getTotalCartAmount, getTotalItems };
+    const contextValue = { all_product, cartItems,all_categories, addToCart, removeFromCart, getTotalCartAmount, getTotalItems };
     return (
         <shopcontext.Provider value={contextValue}>
             {props.children}
@@ -101,5 +105,9 @@ const ShopProvider = (props) => {
     )
 
 }
+ export const useShop=()=>{
+    return useContext(shopcontext);
+}
+
 export default ShopProvider;
 

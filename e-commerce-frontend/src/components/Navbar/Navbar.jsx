@@ -5,64 +5,73 @@ import logo from '../assets/image.png'
 import cart from '../assets/cart.webp'
 import { Link } from 'react-router-dom'
 import { shopcontext } from '../../context/ShopContext'
+import search_icon from '../assets/Ecommerce_Assets/Assets/Frontend_Assets/search_icon.png'
+import profile_icon from '../assets/profile-icon-png.png'
 const Navbar = () => {
 
-   const [menu,setmenu]=useState("Men");
-  const {getTotalItems}=useContext(shopcontext);
-  const [state,setstate]=useState("Login");
-   
-  const changestate=()=>{
-    if(localStorage.getItem('token')){
+  
+  const { getTotalItems } = useContext(shopcontext);
+  const [state, setstate] = useState("Login");
+
+  const changestate = () => {
+    if (localStorage.getItem('token')) {
       setstate('Logout');
     }
     else setstate('Login');
   }
-  const logout=()=>{
+  const logout = () => {
     localStorage.removeItem('token');
     changestate();
     window.location.replace('/');
 
   }
 
-  useEffect(()=>{
-changestate();
-  },[])
+  useEffect(() => {
+    changestate();
+  }, [])
 
   return (
-   <div className='navbar'>
-    <div className='navbar-logo'>
-    <img src={logo} alt="logo" height={50} width={50} />
-    <p>Shop  Smart</p>
+    <div className='navbar'>
+      <div className='navbar-logo'>
+        <img src={logo} alt="logo" height={50} width={50} />
+        <p>Shop  Smart</p>
+      </div>
+      <div className="searchbar">
+        <div className='search-icon'>
+          <img src={search_icon} alt=""  width={20} height={20} />
+        </div>
+        <div className="input">
+          <input type="text" name="search_input" placeholder="Search for Products, Brands and More" />
+        </div>
+      </div>
+      <div className='login-cart'>
+        {(state === 'Login') ? <Link to='/login'>
+          <button type="button">
+            <img src={profile_icon} alt="" width={25} height={25} />
+            {
+              state
+            }
+          </button>
+        </Link> : <button onClick={() => (
+          logout()
+        )}>{
+            state
+          }</button>
+        }
+        <div className="cart">
+        <Link to='/cart'>
+          <img src={cart} alt="" height={25} width={50} />
+        </Link>
+
+
+        <div className="cart-count">{getTotalItems()}</div>
+        </div>
+
+        
+      </div>
+
+
     </div>
-    <ul >
-        <li onClick={()=>{setmenu("shop")}}><Link style={{textDecoration:'none'}} to='/'>Shop</Link> {menu==="shop"?<hr/>:<></>}</li>
-        <li onClick={()=>{setmenu("men")}}><Link style={{textDecoration:'none'}} to='/mens'>Men </Link>{menu==="men"?<hr/>:<></>}</li>
-        <li onClick={()=>{setmenu("women")}}><Link style={{textDecoration:'none'}} to='/womens'>Women</Link> {menu==="women"?<hr/>:<></>}</li>
-        <li onClick={()=>{setmenu("kids")}}><Link style={{textDecoration:'none'}} to='/kids'>Kids</Link> {menu==="kids"?<hr/>:<></>}</li>
-    </ul>
-    <div className='login-cart'>
-    {(state==='Login')?<Link to='/login'> 
-    <button type="button">
-      {
-        state
-      }
-    </button>
-    </Link>:<button onClick={()=>(
-logout()
-    )}>{
-      state
-}</button>
-     }
-    <Link to='/cart'>
-    <img src={cart} alt="" height={25} width={50} />
-    </Link>
-    
-   
-    <div className="cart-count">{getTotalItems()}</div>
-    </div>
-    
-    
-   </div>
   )
 }
 

@@ -7,7 +7,8 @@ const jwt=require('jsonwebtoken')
 require('dotenv').config();
 const Product=require('./models/product')
 const User=require('./models/user')
-const port=process.env.PORT||3000;
+const Category = require('./models/Categories');
+const port=process.env.PORT||4000;
 const app=express();
 
 app.use(express.json());
@@ -45,7 +46,41 @@ res.json({
     image_url:`http://localhost:4000/images/${req.file.filename}`
 })
 })
+app.post('/uploadcategory',upload.single('categoryimage'),(req,res)=>{
+    res.json({
+        success:1,
+        image_url:`http://localhost:4000/images/${req.file.filename}`
+    })
+})
+app.post('/addcategory',async (req,res)=>{
+   const {name,image,subcategories}=req.body;
+   const arr=[];
+   subcategories.split(",").map((item)=>{
+    arr.push({name:item});
+   })
+    const prev=await Category.findOne({name:name});
+    if(prev){
+        const ar=[];
+        arr.map((i)=>{
+            if(!(prev.subcategories.find((item)=>item.name===i.name))){
+                prev.subcategories.push({name:i.name});
+            }
+        })
 
+        const category=await Category.updateOne({name:name},prev);
+  res.json(category);
+    }
+    else{
+    const category=await Category.create({
+    name:name,
+    image:image,
+    subcategories:arr,
+  })
+  
+  res.json(category);
+}
+
+})
 app.post('/addproduct',async (req,res)=>{
     let products=await Product.find({});
     let id;
@@ -83,27 +118,43 @@ app.get('/allproducts',async (req,res)=>{
     res.send(products);
 })
 
+app.get('/allcategories',async (req,res)=>{
+    let categories=await Category.find({});
+    res.send(categories);
+})
+
 app.post('/signup',async (req,res)=>{
+const {username,email,password}=req.body;
+ if(!email||!email.includes('@gmail.com')||!email.includes('@reddif.com')||!email.includes('@hotmail.com')||!email.incluse('@yahoo.com')||!email.includes('@outlook.com')){
+      res.status(400).json({success:false,error:'Please Enter valid E-mail'});
+
+ }
 let check=await User.findOne({
-    email:req.body.email
+    email:email
 })
 if(!check){
      let cart={};
          for(let i=0;i<=40;i++){
             cart[i]=0;
          }
-      const user=   await User.insertMany({
-            name:req.body.username,
-            email:req.body.email,
-            password:req.body.password,
+      try{   
+         let user=await User.insertMany({
+            name:username,
+            email:email,
+            password:password,
             cartData:cart,
          })
-
          const payload={
             id:user._id,
          }
          const token=jwt.sign(payload,"secret_key");
          res.json({success:true,token});
+        }
+        catch(error){
+             res.status(400).json({success:false,error:'All fields are required'});
+        }
+
+         
 
 
 }
@@ -194,6 +245,8 @@ app.post('/delete',fetchUser,async (req,res)=>{
       
       res.json(updated_user.cartData);
 })
+
+
 
 
 

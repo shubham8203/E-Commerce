@@ -4,12 +4,14 @@ import Popular_items from '../components/Popular-Items/Popular-items'
 import Offer from '../components/Offers/Offer'
 import NewCollections from '../components/NewCollections/NewCollections'
 import News_letter from '../components/NewsLetter/News_letter'
+import Category from '../components/Category/Category'
 
 
 
 const Shop = () => {
   return (
-    <div>
+    <div style={{width:'100%'}}>
+      <Category/>
       <Hero/>
       <Popular_items/>
       <Offer/>
