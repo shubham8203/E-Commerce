@@ -125,7 +125,7 @@ app.get('/allcategories',async (req,res)=>{
 
 app.post('/signup',async (req,res)=>{
 const {username,email,password}=req.body;
- if(!email||!email.includes('@gmail.com')||!email.includes('@reddif.com')||!email.includes('@hotmail.com')||!email.incluse('@yahoo.com')||!email.includes('@outlook.com')){
+ if(!email&&!email.includes('@gmail.com')&&!email.includes('@reddif.com')&&!email.includes('@hotmail.com')&&!email.incluse('@yahoo.com')&&!email.includes('@outlook.com')){
       res.status(400).json({success:false,error:'Please Enter valid E-mail'});
 
  }
@@ -145,9 +145,10 @@ if(!check){
             cartData:cart,
          })
          const payload={
-            id:user._id,
+            email:user.email,
          }
          const token=jwt.sign(payload,"secret_key");
+         console.log(token);
          res.json({success:true,token});
         }
         catch(error){
@@ -168,7 +169,7 @@ let user=await User.findOne({email:req.body.email});
 if(user){
     if(user.password===req.body.password){
         const data={
-            id:user._id
+            email:user.email,
         }
         const token=jwt.sign(data,"secret_key");
         res.json({success:true,token});
@@ -209,8 +210,8 @@ app.get('/newcollections',async (req,res)=>{
    }
    else{
       try{
-        const data=jwt.verify(token,'secret_key');
-        req.user=data.id;
+        const data=jwt.verify(token,"secret_key");
+        req.user=data.email;
         next();
       }
       catch(error){
@@ -220,10 +221,10 @@ app.get('/newcollections',async (req,res)=>{
   }
 app.post('/addtocart',fetchUser,async (req,res)=>{
 
-      let user=await User.findOne({_id:req.user});
+      let user=await User.findOne({email:req.user});
     
       user.cartData[req.body.itemId]+=1;
-       await User.findOneAndUpdate({_id:req.user},{
+       await User.findOneAndUpdate({email:req.user},{
         cartData:user.cartData
       })
       
@@ -231,17 +232,18 @@ app.post('/addtocart',fetchUser,async (req,res)=>{
      
 })
 app.post('/cart',fetchUser,async (req,res)=>{
-    let user=await User.findOne({_id:req.user});
+    let user=await User.findOne({email:req.user});
+    console.log(user);
     res.send(user.cartData);
 })
 
 app.post('/delete',fetchUser,async (req,res)=>{
-    const user=await User.findOne({_id:req.user});
+    const user=await User.findOne({email:req.user});
     user.cartData[req.body.itemId]-=1;
-    await User.findOneAndUpdate({_id:req.user},{
+    await User.findOneAndUpdate({email:req.user},{
         cartData:user.cartData
       })
-      const updated_user=await User.findOne({_id:req.user});
+      const updated_user=await User.findOne({email:req.user});
       
       res.json(updated_user.cartData);
 })

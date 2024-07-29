@@ -7,16 +7,17 @@ import React, { createContext, useEffect, useState,useContext} from "react";
 
 export const shopcontext = createContext();
 
-const ShopProvider = (props) => {
+const ShopProvider =  (props) => {
     const [cartItems, setcartItems] = useState({});
     const [all_product, setall_product] = useState([]);
     const [all_categories,setall_categories]=useState([{
 
     }])
-    useEffect(() => {
+
+    useEffect( () => {
         fetch('http://localhost:4000/allproducts').then((res) => (res.json())).then((data) => (setall_product(data)));
         if (localStorage.getItem('token')) {
-            fetch('http://localhost:4000/cart', {
+             fetch('http://localhost:4000/cart', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/form-data',
@@ -25,12 +26,12 @@ const ShopProvider = (props) => {
                 },
                 body: "",
 
-            }).then((res) => (res.json())).then((data) => setall_product(data))
+            }).then((res) => (res.json())).then((data) => setcartItems(data))
         }
 
-        fetch('http://localhost:4000/allcategories').then((res)=>res.json()).then((data)=>setall_categories(data));
+         fetch('http://localhost:4000/allcategories').then((res)=>res.json()).then((data)=>setall_categories(data));
         
-    }, [])
+    }, []);
 
 
     const addToCart = (id) => {
@@ -51,9 +52,9 @@ const ShopProvider = (props) => {
 
 
         }
-        else alert("Login First");
-
-        console.log(cartItems);
+        else {
+        window.location.pathname='/login';
+        }
     }
 
     const removeFromCart = (id) => {

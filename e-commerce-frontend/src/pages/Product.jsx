@@ -10,6 +10,8 @@ const Product = () => {
   const Product=all_product.find((item)=>{
        return item.id=== Number(productId);
   })
+  console.log(all_product);
+  
 
   return (
     <div>

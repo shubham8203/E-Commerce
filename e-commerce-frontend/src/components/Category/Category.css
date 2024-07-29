@@ -1,13 +1,77 @@
 
 .category-container{
-    width:90%;
-    height:120px;
+    width:98%;
+    height:140px;
    display:flex;
    justify-content: center;
    align-items: center;
-   margin:0 auto;
-
+   margin:10px auto;
+   margin-top: 4.8%;
+background-color: white;
 }
+.NavigationMenuContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    animation-duration: 250ms;
+    animation-timing-function: ease;
+  }
+  .NavigationMenuContent[data-motion='from-start'] {
+    animation-name: enterFromLeft;
+  }
+  .NavigationMenuContent[data-motion='from-end'] {
+    animation-name: enterFromRight;
+  }
+  .NavigationMenuContent[data-motion='to-start'] {
+    animation-name: exitToLeft;
+  }
+  .NavigationMenuContent[data-motion='to-end'] {
+    animation-name: exitToRight;
+  }
+.NavigationMenuRoot {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    z-index: 1;
+    
+  }
+  .NavigationMenuList {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    padding: 4px;
+    border-radius: 6px;
+    list-style: none;
+    box-shadow: 0 2px 10px  black;
+    margin: 0;
+  }
+  .NavigationMenuTrigger,
+.NavigationMenuLink {
+  padding: 8px 12px;
+  outline: none;
+  user-select: none;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: 4px;
+  font-size: 15px;
+  color: violet;
+}
+.NavigationMenuTrigger:focus,
+.NavigationMenuLink:focus {
+  box-shadow: 0 0 0 2px violet;
+}
+.NavigationMenuTrigger:hover,
+.NavigationMenuLink:hover {
+  background-color: violet;
+}
+.NavigationMenuTrigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px;
+  }
 .innercontainer{
      width:90%;
      height:100%;
@@ -16,12 +80,24 @@
     align-items: center;
 
 }
+.innerdiv{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+    
+}
 .category-items{
      height:90%;
      display: flex;
      flex-direction: column;
-     align-items: center;
+     align-items:center;
+     justify-content: center;
      gap:10px;
+     position: relative;
+  
+    
 }
 .category-items .image{
      height:60%;

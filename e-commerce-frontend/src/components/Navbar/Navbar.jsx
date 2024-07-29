@@ -32,10 +32,12 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <div className='navbar-logo'>
+     <Link to='/' style={{textDecoration:'none',color:'inherit'}} reloadDocument>
+     <div className='navbar-logo'>
         <img src={logo} alt="logo" height={50} width={50} />
         <p>Shop  Smart</p>
       </div>
+     </Link>
       <div className="searchbar">
         <div className='search-icon'>
           <img src={search_icon} alt=""  width={20} height={20} />
@@ -45,7 +47,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className='login-cart'>
-        {(state === 'Login') ? <Link to='/login'>
+        {(state === 'Login') ? <Link to='/login' reloadDocument>
           <button type="button">
             <img src={profile_icon} alt="" width={25} height={25} />
             {
@@ -59,7 +61,7 @@ const Navbar = () => {
           }</button>
         }
         <div className="cart">
-        <Link to='/cart'>
+        <Link to={(localStorage.getItem('token'))?'/cart':'/login'} reloadDocument={(localStorage.getItem('token'))?false:true} >
           <img src={cart} alt="" height={25} width={50} />
         </Link>
 

@@ -12,6 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family:Poppins;
   overflow-x: hidden;
+  background-color: rgb(219, 218, 218);
 }
 
 #root{

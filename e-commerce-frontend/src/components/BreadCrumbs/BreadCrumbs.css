@@ -5,3 +5,10 @@
     font-weight: 500;
     margin:10px;
 }
+a{
+    color:blue;
+    text-decoration: none;
+}
+a:hover{
+ color:rgb(73, 182, 245)
+}
