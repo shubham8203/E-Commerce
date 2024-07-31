@@ -67,7 +67,7 @@
     width:100%;
     outline: none;
     border:none;
-    border-radius: 75px;
+    
     color:#515151;
     font-size: 20px;
     font-weight: 500;
@@ -79,7 +79,7 @@
     position:relative;
     gap:10px
 }
-.login-cart button:hover{
+.login-cart button{
  background-color:rgb(243, 184, 176);
  color:black;
 
@@ -114,16 +114,16 @@
 }
 .searchbar .search-icon{
    
-    width:10%;
+    width:100%;
     height:100%;
     display:flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0 10px 10px 0px;
+   
 }
 
-.search-icon:hover{
-    background-color: rgb(157, 157, 236);
+.search-icon{
+    background-color: rgb(250, 84, 103);
 }
 .searchbar input{
     outline:none;
@@ -136,10 +136,28 @@
    border-top-right-radius: 10px;
    border-bottom-right-radius: 10px;
 }
-.searchbar .input{
+.searchbar form .input{
+    width:90%;
+    height:100%;
+   border-radius: 10px;
+}
+.searchbar form{
+    display:flex;
     width:100%;
     height:100%;
-    padding:8px 5px;
+    border-radius: 10px;
+}
+form a{
+    width:10%;
+    height:100%;
+}
+form a button{
+    outline:none;
+    border:none;
+    
+}
+.input input{
+  padding-left: 5px;
 }
 .logout{
     height:60px;
@@ -157,19 +175,23 @@
 }
 .logout a{
     width:100%;
+    height:50%;
 }
 .logout ul{
     color:black;
-    font-size: 15px;
+    font-size: 18px;
     font-family: 'Roboto';
     width:100%;
+    height:100%;
 }
 .logout ul li{
     width:100%;
+    height:100%;
+    padding: 2px 2px;
 }
 .logout ul li:hover{
     color:white;
-    background-color: rgba(41, 41, 250, 0.824);
+    background-color: rgba(223, 56, 92, 0.824);
 }
 .login-cart button p{
     width:max-content;

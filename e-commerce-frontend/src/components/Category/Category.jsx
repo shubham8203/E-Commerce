@@ -9,7 +9,7 @@ const Category = () => {
   const [category,setcategory]=useState("");
   const [style, setstyle]=useState({})
   return (
-    <div className='category-container' style={(window.location.pathname==='/')?{}:{height:'100px',backgroundColor:'#de4960',color:'white'}}>
+    <div className='category-container' style={(window.location.pathname==='/')?{}:{height:'80px',backgroundColor:'#de4960',color:'white'}}>
       <div className='innercontainer'>
       {
         all_categories.map((item,i)=>{

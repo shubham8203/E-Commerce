@@ -1,15 +1,20 @@
 import React, { useContext,useEffect,useState } from 'react'
 import { shopcontext } from '../context/ShopContext';
+import './CSS/search.css'
 
 const Search = () => {
     const {all_categories}=useContext(shopcontext);
     const [search,setsearch]=useState('');
-  
+  let input;
      useEffect(()=>{
         if(search!=localStorage.getItem('search')){
+            
             setsearch(localStorage.getItem('search'));
         }
+        
+        
 },[search])
+
     const mp=new Map();
     console.log(all_categories);
     all_categories.map((item)=>{
@@ -21,10 +26,10 @@ const Search = () => {
     <div className='search'>
          <h1>Search-{search}</h1>
           <div className="search-criteria">
-            <p>Search criteria</p>
+            <p>Search Criteria</p>
             <div className="searchfield">
                 <div className="fields">
-                    <input type="text" name="name" id=""  value={search} />
+                    <input defaultValue={search} type="text" name="name" id=""  onSubmit={(e)=>setsearch(e.target.value)}  />
                     <div>
                         <input type="checkbox" name="" id="" />
                         <p>Search in product descriptions</p>
@@ -52,7 +57,11 @@ const Search = () => {
                 </div>
             </div>
           </div>
-      
+       <div className="search-button">
+           <button>
+            Search
+           </button>
+       </div>
     </div>
   )
 }
