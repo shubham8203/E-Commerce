@@ -13,6 +13,7 @@ import banner_mens from './components/assets/Ecommerce_Assets/Assets/Frontend_As
 import banner_women from './components/assets/Ecommerce_Assets/Assets/Frontend_Assets/banner_women.png'
 import banner_kids from './components/assets/Ecommerce_Assets/Assets/Frontend_Assets/banner_kids.png'
 import Category from './components/Category/Category';
+import Search from './pages/Search';
 
 
 function App(){
@@ -26,10 +27,11 @@ function App(){
     <Navbar/>
     {(window.location.pathname!=='/login'&&window.location.pathname!=='/signup')&&<Category/>} 
     <Routes>
+      <Route path='/search' element={<Search search={localStorage.getItem('search')} />}></Route>
       <Route path='/' element={<Shop/>}></Route>
-      <Route path='/mens' element={<ShopCategory banner={banner_mens} category="men"/>}></Route>
-      <Route path='/womens' element={<ShopCategory banner={banner_women} category="women"/>}></Route>
-      <Route path='/kids' element={<ShopCategory banner={banner_kids} category="kid"/>}></Route>
+      <Route path='/mens' element={<ShopCategory banner={banner_mens} category="mens-wear"/>}></Route>
+      <Route path='/womens' element={<ShopCategory banner={banner_women} category="women-wear"/>}></Route>
+      <Route path='/kids' element={<ShopCategory banner={banner_kids} category="Kids"/>}></Route>
       <Route path="/product" >
           <Route path=":productId" element={<Product/>}>
 

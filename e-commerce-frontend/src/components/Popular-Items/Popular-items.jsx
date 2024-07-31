@@ -10,7 +10,7 @@ const Popular_items = () => {
    useEffect(()=>{
       fetch('http://localhost:4000/popular').then((res)=>(res.json())).then((data)=>(setpopular(data)));
    },[])
-
+   
   return (
     <div className='container'>
 <div className='popular'>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext,useState } from 'react'
 import './ProductDisplay.css'
 import star_icon from '../assets/Ecommerce_Assets/Assets/Frontend_Assets/star_icon.png'
 import star_dull_icon from '../assets/Ecommerce_Assets/Assets/Frontend_Assets/star_dull_icon.png'
@@ -7,6 +7,7 @@ import { shopcontext } from '../../context/ShopContext'
 const ProductDisplay = (props) => {
     const {Product}=props;
     const {addToCart}=useContext(shopcontext);
+    const [quantity,setquantity]=useState(0);
     
 
   return (
@@ -54,7 +55,11 @@ ${Product.new_price}
           <div>XXL</div>
         </div>
         </div>
-        <button onClick={()=>(addToCart(Product.id))}>ADD TO CART</button>
+        <div className="productdisplay-right-qty">
+          <p>Qty</p>
+          <input  type="number" min={0}  id="" onChange={(e)=>(setquantity(e.target.value))}  style={{fontSize:'15px',padding:'0px 5px',borderRadius:'10px'}} />
+        </div>
+        <button onClick={()=>(addToCart(Product.id,quantity))}>ADD TO CART</button>
         <p className='productdisplay-right-category'><span>Category: {Product.category} , T-Shirt, Crop-Top </span><br />Tags:Modern, Latest</p>
 
     </div>

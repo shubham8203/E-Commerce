@@ -1,11 +1,14 @@
 import React, { useContext } from 'react'
-import {shopcontext} from '../context/ShopContext'
+import { useShop} from '../context/ShopContext'
 import dropdown_icon from '../components/assets/Ecommerce_Assets/Assets/Frontend_Assets/dropdown_icon.png'
 import Item from '../components/items/Item';
 import './CSS/ShopCategory.css'
+import All_product from '../components/assets/Ecommerce_Assets/Assets/Frontend_Assets/all_product'
+
 
  const ShopCategory = (props) => {
-   const {all_product}=useContext(shopcontext);
+   const {all_product}=useShop();
+
   return (
     <div className='shopcategory'>
       <img src={props.banner} alt="" className='banner' />
@@ -20,13 +23,23 @@ import './CSS/ShopCategory.css'
       </div>
       <div className="shopcategory-products">
          {
-          all_product.map((item,i)=>{
+        (all_product.length>0)?all_product.map((item,i)=>{
+            if(item.subcategory===props.category){
+
+              return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} ></Item>
+                         }
+          }):
+          All_product.map((item,i)=>{
             if(item.category===props.category){
 
- return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} ></Item>
-            }
+              return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} ></Item>
+                         }
           })
-         }
+
+            }
+          
+        
+         
 
       </div>
       <div className="button">

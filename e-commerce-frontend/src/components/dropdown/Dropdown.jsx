@@ -10,15 +10,16 @@ const Dropdown = (props) => {
   return (
     <div className='dropdown' style={window.location.pathname!=='/'?{top:'80px'}:{}}>
        <ul>
-        {
-            subcategories.map((ele)=>{
+        {   
+            subcategories.map((ele,i)=>{
                return (
-               <li>
-                <Link to={mp.has(ele.name)?mp.get(ele.name):""} style={{textDecoration:'none', color:'inherit'}}>
+                <Link  to={mp.has(ele.name)?mp.get(ele.name):""} style={{textDecoration:'none' }}><li key={i}>
+                
                 {ele.name}
-                </Link>
+               
                 
                </li>
+               </Link>
                )
             })
         }

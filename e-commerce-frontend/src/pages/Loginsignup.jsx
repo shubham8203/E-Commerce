@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import "./CSS/LoginSignup.css";
 
 const Loginsignup = () => {
@@ -8,6 +8,14 @@ const Loginsignup = () => {
     email: "",
     password: "",
   })
+  
+ const s=localStorage.getItem('state');
+ useEffect(()=>{
+  if(s!=null){
+    setstate(s);
+    localStorage.removeItem('state');
+  }
+ },[state]);
   const [agree, setagree] = useState(false);
   const accept = (e) => {
     setagree(e.target.value);
@@ -30,8 +38,8 @@ const Loginsignup = () => {
     })
 
     if (response.success) {
-      localStorage.setItem('token', response.token);
-
+      localStorage.setItem('token',response.token);
+      localStorage.setItem('username',response.name);
       window.location.replace('/');
 
     }
@@ -54,7 +62,8 @@ const Loginsignup = () => {
     })
 
     if (response.success) {
-      localStorage.setItem('token', response.token);
+      localStorage.setItem('token',response.token);
+      localStorage.setItem('username',response.name);
       window.location.replace('/');
 
     }

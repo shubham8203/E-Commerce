@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState,useContext} from "react";
-
-
+import All_product from '../components/assets/Ecommerce_Assets/Assets/Frontend_Assets/all_product'
 
 
 
@@ -13,11 +12,11 @@ const ShopProvider =  (props) => {
     const [all_categories,setall_categories]=useState([{
 
     }])
-
-    useEffect( () => {
-        fetch('http://localhost:4000/allproducts').then((res) => (res.json())).then((data) => (setall_product(data)));
+       
+    useEffect(  () => {
+         fetch('http://localhost:4000/allproducts').then((res) => (res.json())).then((data) => (setall_product(data)));
         if (localStorage.getItem('token')) {
-             fetch('http://localhost:4000/cart', {
+              fetch('http://localhost:4000/cart', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/form-data',
@@ -29,12 +28,12 @@ const ShopProvider =  (props) => {
             }).then((res) => (res.json())).then((data) => setcartItems(data))
         }
 
-         fetch('http://localhost:4000/allcategories').then((res)=>res.json()).then((data)=>setall_categories(data));
+          fetch('http://localhost:4000/allcategories').then((res)=>res.json()).then((data)=>setall_categories(data));
         
     }, []);
 
 
-    const addToCart = (id) => {
+    const addToCart = (id,qty) => {
 
         if (localStorage.getItem('token')) {
             fetch('http://localhost:4000/addtocart', {
@@ -44,7 +43,7 @@ const ShopProvider =  (props) => {
                     'token': `${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ itemId: id }),
+                body: JSON.stringify({ itemId: id ,qty:Number(qty)}),
 
             }).then((res) => (res.json())).then((resdata) => { setcartItems(resdata.data) })
 

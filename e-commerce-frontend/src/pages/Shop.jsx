@@ -10,7 +10,7 @@ import Category from '../components/Category/Category'
 
 const Shop = () => {
   return (
-    <div style={{width:'100%'}}>
+    <div style={{width:'100%',marginBottom:'100px'}}>
       
       <Hero/>
       <Popular_items/>

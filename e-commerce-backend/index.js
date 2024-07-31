@@ -23,7 +23,7 @@ return cb(null,`${file.fieldname}_${Date.now()}${path.extname(file.originalname)
     }
 })
 const upload=multer({
-    storage:storage,
+    storage
 });
 
 mongoose.connect(process.env.MONGO_URL).then(()=>{
@@ -138,18 +138,19 @@ if(!check){
             cart[i]=0;
          }
       try{   
-         let user=await User.insertMany({
+         await User.insertMany({
             name:username,
             email:email,
             password:password,
             cartData:cart,
          })
+         const user=await User.findOne({email:email});
          const payload={
-            email:user.email,
+            email:email,
          }
-         const token=jwt.sign(payload,"secret_key");
+         const token=jwt.sign(payload,"secret_key",{expiresIn:"0.5 h"});
          console.log(token);
-         res.json({success:true,token});
+         res.json({success:true,token,name:user.name});
         }
         catch(error){
              res.status(400).json({success:false,error:'All fields are required'});
@@ -172,7 +173,7 @@ if(user){
             email:user.email,
         }
         const token=jwt.sign(data,"secret_key");
-        res.json({success:true,token});
+        res.json({success:true,token,name:user.name});
     }
     else{
         res.json({success:false,error:"wrong password"});
@@ -223,7 +224,7 @@ app.post('/addtocart',fetchUser,async (req,res)=>{
 
       let user=await User.findOne({email:req.user});
     
-      user.cartData[req.body.itemId]+=1;
+      user.cartData[req.body.itemId]+=req.body.qty;
        await User.findOneAndUpdate({email:req.user},{
         cartData:user.cartData
       })
@@ -232,7 +233,10 @@ app.post('/addtocart',fetchUser,async (req,res)=>{
      
 })
 app.post('/cart',fetchUser,async (req,res)=>{
-    let user=await User.findOne({email:req.user});
+    const token=req.header('token');
+
+console.log(jwt.verify(token,'secret_key'));
+    const user=await User.findOne({email:req.user});
     console.log(user);
     res.send(user.cartData);
 })
@@ -246,6 +250,18 @@ app.post('/delete',fetchUser,async (req,res)=>{
       const updated_user=await User.findOne({email:req.user});
       
       res.json(updated_user.cartData);
+})
+
+app.post('/update',async (req,res)=>{
+    await Product.updateMany({name:'Men Green Solid Zippered Full-Zip Slim Fit Bomber Jacket'},{subcategory:'mens-wear'});
+    await Product.updateMany({name:'Boys Orange Colourblocked Hooded Sweatshirt'},{subcategory:'Kids'});
+    await Product.updateMany({name:'Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse'},{subcategory:'women-wear'});
+    res.send('successfully updated');
+})
+
+app.post('/search',(req,res)=>{
+    const to_search=req.body.search;
+    
 })
 
 
