@@ -9,8 +9,8 @@ const CartItems = () => {
     const arr=(all_product||All_product);
 
   return (
-    
-    <div className='cartitems'>
+    <div class='cartitems-container'>
+           <div className='cartitems'>
         <div className="cartitems-format-main">
             <p>Product</p>
             <p>Title</p>
@@ -70,6 +70,8 @@ const CartItems = () => {
             </div>
             
     </div>
+    </div>
+    
   )
 }
 

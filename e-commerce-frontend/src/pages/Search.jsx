@@ -36,7 +36,7 @@ const Search = () => {
                     </div>
                 </div>
                 <div className="fields">
-                <select name="" id="" width={500}  > 
+                <select name="" id="" width={500}   > 
                  
                     <option value="All Category">All Category</option>
                     {all_categories.map((item,i)=>{

@@ -8,12 +8,14 @@
     gap:40px;
 }
 h1{
+    
     font-size:50px;
     font-weight: 500;
     color:rgb(123, 123, 123);
     font-family: 'Roboto';
     width:90%;
     margin: 0 auto;
+    margin-top: 40px;
 }
 .search-criteria{
     display: flex;

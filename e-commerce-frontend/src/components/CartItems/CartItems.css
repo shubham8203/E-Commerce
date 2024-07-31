@@ -1,5 +1,11 @@
+.cartitems-container{
+    margin:20px auto;
+    border:1px solid rgb(237, 102, 125);
+}
 .cartitems{
-    margin:100px 170px;
+   width:90%;
+   margin:50px auto;
+    
 }
 .cartitems hr{
     height:3px;
@@ -7,6 +13,7 @@
     border:0;
 }
 .cartitems-format-main{
+    width:90%;
     display:grid;
     grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr 1fr;
     text-align: center;
