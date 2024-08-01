@@ -256,13 +256,55 @@ app.post('/update',async (req,res)=>{
     await Product.updateMany({name:'Men Green Solid Zippered Full-Zip Slim Fit Bomber Jacket'},{subcategory:'mens-wear'});
     await Product.updateMany({name:'Boys Orange Colourblocked Hooded Sweatshirt'},{subcategory:'Kids'});
     await Product.updateMany({name:'Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse'},{subcategory:'women-wear'});
+    await Product.updateMany({},{description:"A lightweight, usually knitted, pullover shirt, close-fitting and having a round neckline and short sleeves, worn as an undershirt or outer garment"});
     res.send('successfully updated');
 })
 
-app.post('/search',(req,res)=>{
-    const to_search=req.body.search;
+app.post('/search',upload.none(),async (req,res)=>{
+   
+    let {search,indescription,category,insubcategory}=req.body;
+  
+  search=search.toLowerCase();
+  console.log(search);
+  console.log(category);
+    let result;
+  let cat=await Category.find({name:category});
+  
+    if(cat.length>0){
+           if(indescription==='true'){
+            const withcategory=await Product.find({category:category});
+            console.log(withcategory);
+            result=withcategory.filter((item)=> (item.name.toLowerCase().includes(search)||item.description.toLowerCase().includes(search)));
+           }
+           else{
+            const withcategory=await Product.find({category:category});
+             result=withcategory.filter((item)=> item.name.toLowerCase().includes(search));
+           }
+
+        
+        
+    }
+    else{
+        if(insubcategory==='true'){
+            if(indescription==='true'){
+             const withsubcategory=await Product.find({subcategory:category});
+             console.log(withsubcategory);
+             result=withsubcategory.filter((item)=> (item.name.toLowerCase().includes(search)||item.description.toLowerCase().includes(search)));
+             console.log(result); 
+            }
+            else{
+                const withsubcategory=await Product.find({subcategory:category});
+                result=withsubcategory.filter((item)=> (item.name.toLowerCase().includes(search)));
+            }
+        }
+       
+    }
+    console.log(result);
+    res.send(result);
+
     
 })
+
 
 
 

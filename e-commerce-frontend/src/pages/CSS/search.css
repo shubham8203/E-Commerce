@@ -1,13 +1,13 @@
 .search{
     width:90%;
-    height:100vh;
+    height:auto;
     border:1px solid rgb(240, 54, 85);
     margin:0 auto;
     display:flex;
     flex-direction: column;
     gap:40px;
 }
-h1{
+.search>h1{
     
     font-size:50px;
     font-weight: 500;
@@ -56,7 +56,7 @@ font-size: 12px;
     padding-left:5px;
 }
 .search-button{
-    height:5%;
+    height:40px;
     display:flex;
     justify-content: flex-end;
     width:80%;
@@ -73,4 +73,33 @@ font-size: 12px;
     cursor: pointer;
     border-radius: 5px;
     box-shadow: 1px 1px 5px rgb(6, 93, 215),-1px -1px 5px rgb(6, 93, 215);
+}
+.search hr{
+    width:90%;
+    margin: 0 auto;
+}
+.searchresult h1{
+    margin:0 auto;
+    width:90%;
+    font-size: 40px;
+    color:rgb(88, 88, 88);
+    font-family: 'Roboto';
+}
+.searchresult p{
+ width:90%;
+ margin: 0 auto;
+}
+.searchresult{
+    display: flex;
+    flex-direction: column;
+    gap:50px;
+}
+.searchitems{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 50px;
+    row-gap: 30px;
+   height:auto;
+   margin-left:60px;
+   padding-bottom: 50px;
 }
