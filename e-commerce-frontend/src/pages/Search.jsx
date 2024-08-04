@@ -2,11 +2,14 @@ import React, { useContext,useEffect,useState } from 'react'
 import { shopcontext } from '../context/ShopContext';
 import './CSS/search.css'
 import Item from '../components/items/Item';
+import {Link} from 'react-router-dom';
+
 
 const Search = () => {
     const {all_categories,all_product}=useContext(shopcontext);
     const [search,setsearch]=useState('');
     const [searchresult,setsearchResult]=useState([]);
+    const [isvisible,setisvisible]=useState(false);
     const formDetails={
       search:'',
       indescription:false,
@@ -15,14 +18,14 @@ const Search = () => {
     };
     
      useEffect(()=>{
-        setsearchResult(all_product);
+        
         if(search!=localStorage.getItem('search')){
             
             setsearch(localStorage.getItem('search'));
         }
         
         
-},[search])
+},[all_categories])
 const changeHandler=()=>{
 formDetails.search=document.getElementById('search').value;
 formDetails.indescription=document.getElementById('indescription').checked;
@@ -30,6 +33,7 @@ formDetails.category=document.getElementById('category').value;
 formDetails.insubcategory=document.getElementById('insubcategory').checked;
 }
   const formHandler= async ()=>{
+   
     changeHandler();
     console.log(formDetails);
     let formdata=new FormData();
@@ -46,8 +50,10 @@ formDetails.insubcategory=document.getElementById('insubcategory').checked;
             },
             body:formdata,
         }).then((res)=>res.json()).then((data)=>setsearchResult(data));
-  }
 
+        
+  }
+    let val=localStorage.getItem('search');
     const mp=new Map();
     console.log(all_categories);
     all_categories.map((item)=>{
@@ -57,12 +63,14 @@ formDetails.insubcategory=document.getElementById('insubcategory').checked;
     })
   return (
     <div className='search'>
-         <h1>Search- '{search}'</h1>
+         <h1>Search- '{localStorage.getItem('search')}'</h1>
           <div className="search-criteria">
             <p>Search Criteria</p>
             <div className="searchfield">
                 <div className="fields">
-                    <input defaultValue={search} type="text" name="search" id="search" />
+                    <input defaultValue={search} type="text"  name="search" id="search" onChange={(e)=>{localStorage.setItem('search',e.target.value);
+                    val=localStorage.getItem('search');
+                    }} />
                     <div>
                         <input type="checkbox" name="indescription" id="indescription"   />
                         <p>Search in product descriptions</p>
@@ -92,12 +100,15 @@ formDetails.insubcategory=document.getElementById('insubcategory').checked;
             </div>
           </div>
        <div className="search-button">
-           <button   onClick={formHandler} >
+           <Link to={`/search?search=${val}`}  onClick={formHandler} >
+           <button  onClick={()=>setisvisible(true)} >
             Search
            </button>
+           </Link>
        </div>
+      
+       {isvisible?<div className="searchresult">
        <hr />
-       <div className="searchresult">
         <h1>Products meeting the search criteria</h1>
         {searchresult.length===0?<p>There is no Product that matches the search criteria</p>:<>
           <div className="searchitems">
@@ -110,8 +121,10 @@ formDetails.insubcategory=document.getElementById('insubcategory').checked;
 
         </>}
 
-       </div>
+       </div>:<></>
+}
     </div>
+        
   )
 }
 

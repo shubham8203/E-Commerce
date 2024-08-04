@@ -1,3 +1,7 @@
+*{
+    padding:0;
+    margin:0;
+}
 .navbar{
     display: flex;
     justify-content:space-between;
@@ -17,6 +21,7 @@
      display: flex;
      
      align-items: center;
+     padding-top: 5px;
      gap:10px;
 }
 .navbar .navbar-logo img{
@@ -53,37 +58,53 @@
    align-items: center;
     height:100%;
 }
-.login-cart a{
+.login-cart>a{
     height:70%;
     text-decoration: none;
-   
+   position:relative;
 }
-.login-cart a{
-    position:relative;
-}
-.login-cart button{
+
+.login-cart>a>button{
     
     height:100%;
     width:100%;
     outline: none;
     border:none;
     
-    color:#515151;
+  
     font-size: 20px;
     font-weight: 500;
-    background-color: white;
+  
     cursor: pointer;
     display:flex;
     align-items: center;
     padding: 2px 10px;
     position:relative;
-    gap:10px
+    gap:10px;
+    background-color:rgb(243, 184, 176);
+    color:black;
 }
 .login-cart button{
- background-color:rgb(243, 184, 176);
- color:black;
-
+      
+    height:80%;
+    width:100%;
+    outline: none;
+    border:none;
+    border-radius: 10px;
+  
+    font-size: 20px;
+    font-weight: 500;
+  
+    cursor: pointer;
+    display:flex;
+    align-items: center;
+    padding: 2px 10px;
+    position:relative;
+    gap:10px;
+    background-color:rgb(243, 184, 176);
+    color:black;
 }
+
 .cart{
     display:flex;
   position:relative;
@@ -159,39 +180,55 @@ form a button{
 .input input{
   padding-left: 5px;
 }
+
 .logout{
-    height:60px;
-    width:100px;
     
+    width:200px;
+    height:100px;
    
-    display:flex;
-    align-items: center;
-   top: 40px;
+    border-radius: 10px;
+   top: 45px;
    left:50%;
-    position:absolute;
-    background-color: white;
+  position:absolute;
+  filter: opacity(90%);
+    background-color: rgb(249, 246, 246);
     box-shadow: 1px 1px 8px  rgb(40, 39, 39) ;
-    border-radius: 5px;
+    
 }
-.logout a{
+
+.logout>ul{
     width:100%;
-    height:50%;
-}
-.logout ul{
-    color:black;
+    height:100%;
+    display:flex;
+    position:relative;
+    flex-direction: column;
+    gap:0px;
     font-size: 18px;
-    font-family: 'Roboto';
+    border-radius: 10px;
+   
+}
+.logout>ul>a{
+    position:relative;
+ height:50%;
+ color:inherit;
+ width:100%;
+ border-radius: 10px;
+
+
+}
+
+.logout>ul>a>li{
+    text-align: center;
     width:100%;
     height:100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.logout ul li{
-    width:100%;
-    height:100%;
-    padding: 2px 2px;
-}
-.logout ul li:hover{
+.logout>ul>a>li:hover{
+    background-color: rgb(236, 109, 141);
     color:white;
-    background-color: rgba(223, 56, 92, 0.824);
 }
 .login-cart button p{
     width:max-content;

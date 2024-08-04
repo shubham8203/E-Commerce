@@ -225,6 +225,9 @@ app.post('/addtocart',fetchUser,async (req,res)=>{
       let user=await User.findOne({email:req.user});
     
       user.cartData[req.body.itemId]+=req.body.qty;
+      if(user.cartData[req.body.itemId]<0){
+        user.cartData[req.body.itemId]=0;
+      }
        await User.findOneAndUpdate({email:req.user},{
         cartData:user.cartData
       })

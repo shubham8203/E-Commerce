@@ -1,8 +1,8 @@
 .productdisplay{
     display:flex;
-    margin:0px 100px;
-    width:100%;
-    gap:40px;
+    margin:0px auto;
+    width:90%;
+    gap:150px;
 }
 .productdisplay-left{
     display:flex;

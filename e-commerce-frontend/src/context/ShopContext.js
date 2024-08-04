@@ -52,6 +52,7 @@ const ShopProvider =  (props) => {
 
         }
         else {
+            alert("Please Login to Add Products to the Cart")
         window.location.pathname='/login';
         }
     }

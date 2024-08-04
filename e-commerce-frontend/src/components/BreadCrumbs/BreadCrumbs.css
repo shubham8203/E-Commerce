@@ -4,11 +4,17 @@
     align-items: center;
     font-weight: 500;
     margin:10px;
+    border:1px solid rgb(250, 59, 97);
+    width:90%;
+  margin:10px auto;
 }
-a{
-    color:blue;
+.breadcrumbs>a{
+    width:max-content;
+    color:rgb(10, 144, 247);
+    padding:0 5px;
     text-decoration: none;
 }
-a:hover{
- color:rgb(73, 182, 245)
+.breadcrumbs>a:hover{
+ color:white;
+ background-color: rgb(255, 156, 172);
 }

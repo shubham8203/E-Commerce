@@ -2,7 +2,8 @@
     width:90%;
     height:auto;
     border:1px solid rgb(240, 54, 85);
-    margin:0 auto;
+    margin:0px auto;
+   padding-bottom: 100px;
     display:flex;
     flex-direction: column;
     gap:40px;
@@ -64,7 +65,8 @@ font-size: 12px;
     
 }
 .search-button button{
-    width:150px;
+    width:100%;
+    height:100%;
     background-color: rgb(5, 92, 213);
     outline:none;
     font-size: 18px;
@@ -102,4 +104,8 @@ font-size: 12px;
    height:auto;
    margin-left:60px;
    padding-bottom: 50px;
+}
+a{
+    height:100%;
+    width:150px;
 }
