@@ -21,7 +21,7 @@ const ShopProvider =  (props) => {
                 headers: {
                     Accept: 'application/form-data',
                     'token': `${localStorage.getItem('token')}`,
-                    'Content-Type': 'application/json'
+                    'Content-Type' : 'application/json'
                 },
                 body: "",
 
@@ -58,18 +58,18 @@ const ShopProvider =  (props) => {
     }
 
     const removeFromCart = (id) => {
-
+         
         if (localStorage.getItem('token')) {
             fetch('http://localhost:4000/delete', {
                 method: 'POST',
                 headers: {
-                    Accept: 'application/form-data',
+                    Accept: 'application/json',
                     'token': `${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ itemId: id }),
 
-            }).then((res) => (res.json())).then((resdata) => ( setcartItems(resdata) ))
+            }).then((res) => (res.json())).then((resdata) => { console.log(resdata);setcartItems(resdata) })
 
 
 
@@ -81,9 +81,11 @@ const ShopProvider =  (props) => {
     const getTotalCartAmount = () => {
         let totalAmount = 0;
         for (const item in cartItems) {
+            console.log(item);
             if (cartItems[item] > 0) {
-                let itemInfo = all_product.find((i) => (i.id === Number(item)));
-                totalAmount += (itemInfo.new_price * cartItems[item]);
+                let itemInfo = all_product.find((ele) => (ele.id == item));
+                
+                totalAmount += ((itemInfo?itemInfo.new_price:0) * cartItems[item]);
             }
         }
         return totalAmount;

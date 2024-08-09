@@ -6,7 +6,7 @@ import All_product from '../assets/Ecommerce_Assets/Assets/Frontend_Assets/all_p
 
 const CartItems = () => {
     const {removeFromCart,all_product,cartItems,getTotalCartAmount,getTotalItems}=useContext(shopcontext);
-    const arr=(all_product||All_product);
+   
 
   return (
     <div class='cartitems-container'>
@@ -21,7 +21,7 @@ const CartItems = () => {
             </div> 
             <hr style={{width:'100%', height:'2px', border:'none',backgroundColor:'#919191',borderRadius:'5px'}}/>
             {
-                arr.map((e,i)=>{
+                all_product.map((e,i)=>{
                     
                    if(cartItems[e.id]>0){
                     return (

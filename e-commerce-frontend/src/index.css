@@ -12,7 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family:Poppins;
   overflow-x: hidden;
-
+scroll-behavior: smooth;
 }
 
 #root{
@@ -23,3 +23,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+

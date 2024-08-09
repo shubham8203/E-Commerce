@@ -82,9 +82,9 @@ formDetails.insubcategory=document.getElementById('insubcategory').checked;
                     <option value="All Category">All Category</option>
                     {all_categories.map((item,i)=>{
                         console.log(item.name);
-                        let val=(item.name).toLowerCase();
+                        
                         return <>
-                        <option value={val}>{item.name}</option>
+                        <option value={item.name}>{item.name}</option>
                         { 
                             mp.get(item.name).map((ele)=><option value={ele.name}>&nbsp;&nbsp;&nbsp;&nbsp;{ele.name}</option>)
                         }

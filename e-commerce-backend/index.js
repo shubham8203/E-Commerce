@@ -120,6 +120,7 @@ app.get('/allproducts',async (req,res)=>{
 
 app.get('/allcategories',async (req,res)=>{
     let categories=await Category.find({});
+    
     res.send(categories);
 })
 
@@ -148,7 +149,7 @@ if(!check){
          const payload={
             email:email,
          }
-         const token=jwt.sign(payload,"secret_key",{expiresIn:"0.5 h"});
+         const token=jwt.sign(payload,"secret_key",{expiresIn:"2 h"});
          console.log(token);
          res.json({success:true,token,name:user.name});
         }
@@ -172,7 +173,7 @@ if(user){
         const data={
             email:user.email,
         }
-        const token=jwt.sign(data,"secret_key");
+        const token=jwt.sign(data,"secret_key",{expiresIn:"2 h"});
         res.json({success:true,token,name:user.name});
     }
     else{
@@ -206,17 +207,20 @@ app.get('/newcollections',async (req,res)=>{
 })
   const fetchUser=async (req,res,next)=>{
    const token=req.header('token');
+    
    if(!token){
     res.status(400).json({error:"Please Login First"});
    }
    else{
       try{
-        const data=jwt.verify(token,"secret_key");
+        let data;
+        data= jwt.verify(token,"secret_key");
         req.user=data.email;
+        console.log(data);
         next();
       }
       catch(error){
-         res.status(400).json({error:'Please Login First'})
+         console.log("error encountered");
       }
    }
   }
@@ -238,18 +242,25 @@ app.post('/addtocart',fetchUser,async (req,res)=>{
 app.post('/cart',fetchUser,async (req,res)=>{
     const token=req.header('token');
 
-console.log(jwt.verify(token,'secret_key'));
+    console.log(jwt.verify(token,'secret_key'));
     const user=await User.findOne({email:req.user});
     console.log(user);
     res.send(user.cartData);
 })
 
 app.post('/delete',fetchUser,async (req,res)=>{
+    const id=req.body.itemId;
     const user=await User.findOne({email:req.user});
-    user.cartData[req.body.itemId]-=1;
-    await User.findOneAndUpdate({email:req.user},{
-        cartData:user.cartData
-      })
+    console.log(user);
+  const cart=user.cartData;
+  console.log(cart);
+ 
+  if(cart[id]>0){
+    console.log(cart[id]);
+   cart[id]=cart[id]-1;
+  }
+    await User.findOneAndUpdate({email:req.user},{cartData:cart});
+
       const updated_user=await User.findOne({email:req.user});
       
       res.json(updated_user.cartData);
@@ -271,12 +282,30 @@ app.post('/search',upload.none(),async (req,res)=>{
   console.log(search);
   console.log(category);
     let result;
-  let cat=await Category.find({name:category});
+    if(category==="All Category"){
+        const withcategory=await Product.find({});
+        console.log(withcategory);
+        if(indescription==='true'){
+        result=withcategory.filter((item)=> (item.name.toLowerCase().includes(search)||item.description.toLowerCase().includes(search)));
+        }
+        else{
+            result=withcategory.filter((item)=> (item.name.toLowerCase().includes(search)));
+        }
+
+    }
+    else{
+        const smallcategory=category.toLowerCase();
+        console.log(smallcategory);
+        console.log(category);
+        let cat=await Category.find({name:category});
   
-    if(cat.length>0){
+        if(cat.length>0){
            if(indescription==='true'){
-            const withcategory=await Product.find({category:category});
+
+             
+            const withcategory=await Product.find({category:smallcategory});
             console.log(withcategory);
+            
             result=withcategory.filter((item)=> (item.name.toLowerCase().includes(search)||item.description.toLowerCase().includes(search)));
            }
            else{
@@ -300,8 +329,12 @@ app.post('/search',upload.none(),async (req,res)=>{
                 result=withsubcategory.filter((item)=> (item.name.toLowerCase().includes(search)));
             }
         }
+        else{
+            result=[]
+        }
        
     }
+}
     console.log(result);
     res.send(result);
 

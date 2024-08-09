@@ -66,7 +66,7 @@ const Navbar = () => {
       
       <div className='login-cart'>
         {(state === 'Login') ?(isvisible)?<Link to='/login' reloadDocument>
-          <button type="button"  onMouseEnter={() => (
+          <button type="button" className='login'  onMouseEnter={() => (
          setisvisible(true)
         )} onMouseLeave={() => (
           setisvisible(false)
@@ -89,7 +89,7 @@ const Navbar = () => {
             
           </div>
         </Link>:<Link to='/login' reloadDocument>
-          <button type="button"  onMouseEnter={() => (
+          <button type="button" className='login'  onMouseEnter={() => (
          setisvisible(true)
         )} onMouseLeave={() => (
           setisvisible(false)
@@ -102,14 +102,14 @@ const Navbar = () => {
           </button>
 
         </Link> : (isvisible)?<>
-        <button  onMouseEnter={() => (
+        <button className='logout-options' onMouseEnter={() => (
          setisvisible(true)
         )} onMouseLeave={() => (
           setisvisible(false)
          )}>
           <img src={profile_icon} alt="" width={25} height={25} />
           
-            <p style={{fontSize:'15px'}}>{localStorage.getItem('username')}</p>
+            <p style={{fontSize:'15px',padding:'0'}}>{localStorage.getItem('username')}</p>
           
           <img src={arrow_icon} alt="" height={15} className='arr' />
           <div className='logout'>
@@ -122,14 +122,14 @@ const Navbar = () => {
           </button>
           
         </>:
-               <button onMouseEnter={() => (
+               <button className='logout-options' onMouseEnter={() => (
                 setisvisible(true)
                )} onMouseLeave={() => (
                  setisvisible(false)
                 )}>
                  <img src={profile_icon} alt="" width={25} height={25} />
                  
-                   <p style={{fontSize:'15px'}}>{localStorage.getItem('username')}</p>
+                   <p style={{fontSize:'15px',padding:'0'}}>{localStorage.getItem('username')}</p>
                  
                  <img src={arrow_icon} alt="" height={15} className='arr' />
                  </button>
@@ -143,7 +143,7 @@ const Navbar = () => {
             alert("Please Login First to View the Cart");
           }
         }} reloadDocument={(localStorage.getItem('token'))?false:true} >
-          <img src={cart} alt="" height={25} width={50} />
+          <img src={cart} alt="" height={35} width={60} />
         </Link>
 
 

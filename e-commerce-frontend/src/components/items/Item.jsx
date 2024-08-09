@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Item = (props) => {
   return (
     <div className='item'>
-       <Link to={`/product/${props.id}`} ><img src={props.image} alt="" /></Link>
+       <Link to={`/product/${props.id}`} style={{textDecoration:'none',color:'inherit'}} ><img src={props.image} alt="" />
         <p>{props.name}</p>
         <div className='item-prices'>
            <div className='item-price-new'>
@@ -16,6 +16,7 @@ const Item = (props) => {
             ${props.old_price}
            </div>
         </div>
+        </Link>
     </div>
   )
 }
